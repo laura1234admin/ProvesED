@@ -1,0 +1,198 @@
+    // Definició Variables:
+    @amplada_planeta: 300px;
+    @alcada_planeta: 300px;
+    //== estil i animacio del planeta =========
+    #div_plan {
+        width: @amplada_planeta;
+        height: @alcada_planeta;
+        background-image: url(planet.png);
+        background-size: cover;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-top: -(@alcada_planeta/2);
+        margin-left: -(@amplada_planeta/2);
+        .shadowed();
+        /* propeitats animacio: (nom,duracio,count,timing "defecte linear" );*/
+        .animation-name-mixin( planeta, 15s, infinite);
+        //animation-direction: alternate;
+        //animation-timing-function: ease-in-out;
+    }
+    .shadowed {
+        filter: url(#drop-shadow);
+        -webkit-filter: drop-shadow(0px 0px 30px rgba(255, 255, 255, 0.7));
+        filter: drop-shadow(0px 0px 30px rgba(255, 255, 255, 0.7));
+    }
+    //============================================
+    // estil i animacio del cohet =============
+    @alcada_coet: 200px;
+    #coet {
+        height: @alcada_coet;
+        width: auto;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-top: -@alcada_coet/2;
+        margin-left: -50px;
+        //per fer ombra cohet
+        filter: url(#drop-shadow);
+        -webkit-filter: drop-shadow(-40px -40px 5px rgba(0, 0, 0, 0.74));
+        filter: drop-shadow(-40px -40px 5px rgba(0, 0, 0, 0.74));
+        .animation-name-mixin(coet, 8s, infinite);
+        animation-direction: reverse;
+    }
+    //funci per transform translate args: x,y
+    .transformar(@x, @y) {
+        -ms-transform: translate(@x, @y);
+        -webkit-transform: translate(@x, @y);
+        transform: translate(@x, @y);
+    }
+    //== estil i animacio del background "estrelles" ======
+    body {
+        background-image: url(stars.png);
+        background-size: cover;
+        .animation-name-mixin(estrelles, 25s, infinite);
+        overflow: hidden;
+    }
+    // estil lletres (dins div lletres)
+    #lletres {
+        height: 80px; //-->no tocar
+        width: 280px; //-->no tocar
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-top: -40px;
+        margin-left: -140px;
+        .animation-name-mixin(lletres, 8s, infinite);
+        z-index: -10;
+    }
+    #lletres h1 {
+        color: #27ff00;
+        font-size: 60px;
+        font-family: 'Lobster', cursive;
+    }
+    //==== DECLARACIO ANIMACIONS ======
+    .animacio_coet() {
+        0% {
+            transform: rotate(0deg) translate(200px, 0px) scale(1.1);
+        }
+        25% {
+            transform: rotate(90deg) translate(200px, 0px) scale(1.5, 1.5);
+        }
+        50% {
+            transform: rotate(180deg) translate(200px, 0px) scale(1.1);
+        }
+        75% {
+            transform: rotate(270deg) translate(200px, 0px) scale(1.5, 1.5);
+        }
+        100% {
+            transform: rotate(360deg) translate(200px, 0px) scale(1.1);
+        }
+    }
+    .animacio_planeta () {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg);
+        }
+    }
+    .animacio_estrelles () {
+        from {
+            background-position: 0 0;
+        }
+        to {
+            background-position: 1280px 0;
+        }
+    }
+    .animacio_lletres () {
+        0% {
+            transform:translateX(-350%)scale(1.8,1.8);
+        }
+        50% {
+            transform:translateX(0%)scale(0.5,0.5);
+        }
+        100% {
+            transform:translateX(+350%) scale(1.8,1.8);
+        }
+    }
+    //=========== CODI AJUDA COMPATIBILITAT (NO CAL TOCAR)===========
+    // Mixin' per escurçar i fer més compatible els atributs d'animació
+    .animation-name-mixin (@arguments, @time, @count, @timing: linear) {
+        -webkit-animation-name: @arguments;
+        -moz-animation-name: @arguments;
+        animation-name: @arguments;
+        -webkit-animation-duration: @time;
+        -moz-animation-duration: @time;
+        animation-duration: @time;
+        -webkit-animation-iteration-count: @count;
+        -moz-animation-iteration-count: @count;
+        animation-iteration-count: @count;
+        -webkit-animation-timing-function: @timing;
+        -moz-animation-timing-function: @timing;
+        animation-timing-function: @timing;
+    }
+    //== DECLARACIO DE LES ANIMACIONS ================
+    @keyframes planeta {
+        .animacio_planeta;
+    }
+    @-o-keyframes planeta {
+        .animacio_planeta;
+    }
+    @-ms-keyframes planeta {
+        .animacio_planeta;
+    }
+    @-moz-keyframes planeta {
+        .animacio_planeta;
+    }
+    @-webkit-keyframes planeta {
+        .animacio_planeta;
+    }
+    // animacio coet:
+    @keyframes coet {
+        .animacio_coet;
+    }
+    @-o-keyframes coet {
+        .animacio_coet;
+    }
+    @-ms-keyframes coet {
+        .animacio_coet;
+    }
+    @-moz-keyframes coet {
+        .animacio_coet;
+    }
+    @-webkit-keyframes coet {
+        .animacio_coet;
+    }
+    // animacio estrelles background:
+    @keyframes estrelles {
+        .animacio_estrelles;
+    }
+    @-o-keyframes estrelles {
+        .animacio_estrelles;
+    }
+    @-ms-keyframes estrelles {
+        .animacio_estrelles;
+    }
+    @-moz-keyframes estrelles {
+        .animacio_estrelles;
+    }
+    @-webkit-keyframes estrelles {
+        .animacio_estrelles;
+    }
+    // animacio lletres:
+    @keyframes lletres {
+        .animacio_lletres;
+    }
+    @-o-keyframes lletres {
+        .animacio_lletres;
+    }
+    @-ms-keyframes lletres {
+        .animacio_lletres;
+    }
+    @-moz-keyframes lletres {
+        .animacio_lletres;
+    }
+    @-webkit-keyframes lletres {
+        .animacio_lletres;
+    }
